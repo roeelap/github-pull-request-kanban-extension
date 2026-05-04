@@ -1,7 +1,5 @@
 # GitHub PR Kanban
 
-<img width="1345" height="821" alt="image" src="https://github.com/user-attachments/assets/9ddd2209-1aaa-4741-9b18-31f0678a0353" />
-
 A Chrome extension that turns GitHub's repository pull request list into a kanban board.
 
 PRs are auto-classified into three columns based on their review and CI status:
@@ -9,6 +7,10 @@ PRs are auto-classified into three columns based on their review and CI status:
 - **Needs Review** — anything that isn't approved yet (drafts, awaiting review, changes requested).
 - **Approved** — approved by reviewers but CI is still running or failing.
 - **Ready for Merge** — approved and CI passing.
+
+  
+<img width="1345" height="821" alt="image" src="https://github.com/user-attachments/assets/9ddd2209-1aaa-4741-9b18-31f0678a0353" />
+
 
 ## Install (development)
 
