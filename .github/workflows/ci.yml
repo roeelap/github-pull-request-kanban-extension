@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject FAIL_CI marker
+        run: |
+          if [ -f FAIL_CI ]; then
+            echo "FAIL_CI marker present in this branch — failing intentionally."
+            exit 1
+          fi
+          echo "ok"
