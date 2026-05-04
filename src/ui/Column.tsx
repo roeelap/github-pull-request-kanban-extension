@@ -3,7 +3,7 @@ import { Card } from './Card';
 
 const TITLES: Record<ColumnId, string> = {
   needs_review: 'Needs Review',
-  approved: 'Approved',
+  approved: 'Approved (waiting for CI)',
   ready_to_merge: 'Ready for Merge',
 };
 

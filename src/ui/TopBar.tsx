@@ -38,6 +38,14 @@ export function TopBar({ compareUrl }: { compareUrl: string }) {
           </option>
         ))}
       </select>
+      <label className="hide-old-toggle">
+        <input
+          type="checkbox"
+          checked={filters.hideOld}
+          onChange={(e) => setFilter('hideOld', e.target.checked)}
+        />
+        Hide PRs older than a week
+      </label>
       <a className="new-pr" href={compareUrl} target="_blank" rel="noreferrer">
         New Pull Request
       </a>

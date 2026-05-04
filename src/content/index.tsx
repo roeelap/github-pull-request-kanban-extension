@@ -51,9 +51,7 @@ async function mount(repo: string) {
   const reactRoot = document.createElement('div');
   shadow.appendChild(reactRoot);
 
-  const tableContainer = document.querySelector('.repository-content, main');
-  tableContainer?.parentElement?.insertBefore(host, tableContainer);
-
+  insertHost(host);
   hideOriginal();
 
   const root = createRoot(reactRoot);
@@ -124,16 +122,34 @@ async function refresh() {
   }
 }
 
+const HIDE_ATTR = 'data-kanban-hidden';
+
+function insertHost(host: HTMLElement): void {
+  const tableContainer =
+    document.querySelector('[data-testid="issue-list"]') ??
+    document.querySelector('.repository-content > div > .Box') ??
+    document.querySelector('.repository-content .Box') ??
+    document.querySelector('.application-main .js-navigation-container');
+
+  if (tableContainer?.parentElement) {
+    tableContainer.parentElement.insertBefore(host, tableContainer);
+    tableContainer.setAttribute(HIDE_ATTR, '');
+    return;
+  }
+
+  const fallback = document.querySelector('.repository-content') ?? document.body;
+  fallback.appendChild(host);
+}
+
 function hideOriginal() {
   if (document.getElementById(HIDE_STYLE_ID)) return;
   const style = document.createElement('style');
   style.id = HIDE_STYLE_ID;
-  style.textContent = `.repository-content > .Box,
-    .repository-content > [data-testid="issue-list"],
-    .application-main .js-navigation-container { display: none !important; }`;
+  style.textContent = `[${HIDE_ATTR}] { display: none !important; }`;
   document.head.appendChild(style);
 }
 
 function showOriginal() {
   document.getElementById(HIDE_STYLE_ID)?.remove();
+  document.querySelectorAll(`[${HIDE_ATTR}]`).forEach((el) => el.removeAttribute(HIDE_ATTR));
 }

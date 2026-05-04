@@ -6,6 +6,7 @@ interface Filters {
   text: string;
   authors: string[];
   labels: string[];
+  hideOld: boolean;
 }
 
 interface KanbanState {
@@ -17,10 +18,12 @@ interface KanbanState {
   setFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
 }
 
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
 export const useKanbanStore = create<KanbanState>((set) => ({
   prs: [],
   loading: false,
-  filters: { text: '', authors: [], labels: [] },
+  filters: { text: '', authors: [], labels: [], hideOld: true },
   setPRs: (prs) => set({ prs }),
   setLoading: (loading) => set({ loading }),
   setFilter: (key, value) =>
@@ -31,6 +34,10 @@ export function selectColumn(prs: EnrichedPR[], column: Column, filters: Filters
   const text = filters.text.trim().toLowerCase();
   return prs.filter((pr) => {
     if (classify(pr) !== column) return false;
+    if (filters.hideOld && pr.createdAt) {
+      const age = Date.now() - new Date(pr.createdAt).getTime();
+      if (Number.isFinite(age) && age > WEEK_MS) return false;
+    }
     if (text && !pr.title.toLowerCase().includes(text) && !pr.author.login.toLowerCase().includes(text)) {
       return false;
     }
