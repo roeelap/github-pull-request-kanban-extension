@@ -21,8 +21,8 @@ export async function mountToggle(repo: string): Promise<ToggleHandle> {
   button.textContent = label(on);
   Object.assign(button.style, {
     position: 'fixed',
-    top: '12px',
-    right: '16px',
+    top: '112px',
+    left: '16px',
     zIndex: '9999',
     padding: '6px 12px',
     fontSize: '12px',
