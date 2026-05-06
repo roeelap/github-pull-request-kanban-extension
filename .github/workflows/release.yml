@@ -19,7 +19,10 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - run: npm install --no-audit --no-fund
+      - name: Install dependencies
+        run: |
+          rm -f package-lock.json
+          npm install --no-audit --no-fund
 
       - run: npm run build
 
