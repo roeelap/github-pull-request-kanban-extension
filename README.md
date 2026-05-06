@@ -12,20 +12,33 @@ PRs are auto-classified into three columns based on their review and CI status:
 <img width="1345" height="821" alt="image" src="https://github.com/user-attachments/assets/9ddd2209-1aaa-4741-9b18-31f0678a0353" />
 
 
-## Install (development)
+## Install
+
+1. **Download** the latest build:
+
+   [github-pr-kanban.zip](https://github.com/roeelap/github-pull-request-kanban-extension/releases/latest/download/github-pr-kanban.zip)
+
+   Or via terminal:
+   ```bash
+   curl -L https://github.com/roeelap/github-pull-request-kanban-extension/releases/latest/download/github-pr-kanban.zip -o github-pr-kanban.zip
+   ```
+
+2. **Unzip** it.
+
+3. Open `chrome://extensions` and enable **Developer mode** (top-right toggle).
+
+4. Click **Load unpacked** and select the unzipped `github-pr-kanban` folder.
+
+Open any GitHub repository's PR list page (`https://github.com/<org>/<repo>/pulls`). A floating **Kanban view** button appears on the page — click it to swap GitHub's table for the kanban.
+
+## Build from source
 
 ```bash
 npm install
 npm run build
 ```
 
-Then in Chrome:
-
-1. Open `chrome://extensions`.
-2. Enable **Developer mode**.
-3. Click **Load unpacked** and select the `dist/` folder.
-
-Open any GitHub repository's PR list page (`https://github.com/<org>/<repo>/pulls`). A floating **Kanban view** button appears at the top-right of the page — click it to swap GitHub's table for the kanban.
+Then load `dist/` as an unpacked extension at `chrome://extensions`.
 
 ## Use
 

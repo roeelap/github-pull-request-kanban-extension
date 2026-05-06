@@ -5,3 +5,5 @@ dist
 .vite
 coverage
 tsconfig.tsbuildinfo
+*.zip
+github-pr-kanban/

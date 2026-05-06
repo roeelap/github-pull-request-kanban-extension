@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Package extension
+        run: |
+          cp -r dist github-pr-kanban
+          zip -r github-pr-kanban.zip github-pr-kanban
+
+      - name: Create or update release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: github-pr-kanban.zip
+          generate_release_notes: true
