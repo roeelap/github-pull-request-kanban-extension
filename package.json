@@ -6,7 +6,8 @@
   "description": "Chrome extension that transforms GitHub pull request lists into a kanban board.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
